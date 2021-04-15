@@ -4,7 +4,7 @@ const sqlite = new Keyv('sqlite://db.sqlite', { table: 'db' });
 
 module.exports = {
 	name: 'bal',
-	aliases: ['wallet', 'esmile'],
+	aliases: ['wallet'],
 	description: '所持金を確認できます。',
 	async execute(message, args) {
 		const db = (await sqlite.get(message.author.id)) || {
