@@ -40,7 +40,7 @@ client.on('guildMemberAdd', async member => {
 	if (gjdb.sm == 0 && gjdb.join == 0) {
 		gjdb.join += 1;
 		gjdb.sm += 10000;
-		smdb.set(member.id, smj);
+		sqlite.set(member.id, smj);
 	}
 });
 
