@@ -22,7 +22,7 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
-const prefix = '.';
+const { prefix, zaimuid } = require('./config.json');
 
 client.on('ready', message => {
 	console.log('botが起動しました');
