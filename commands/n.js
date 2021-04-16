@@ -19,7 +19,6 @@ module.exports = {
 			twows: 0,
 			twols: 0
 		};
-		const homu = (await sqlite.get('823130006480748556')) || { sm: 0 };
 
 		if (args[0] === 'status' || args[0] === 'STATUS') {
 			var embed = new Discord.MessageEmbed()
@@ -56,14 +55,11 @@ module.exports = {
 				if (db.sm >= tgsmp && tgsmp >= 1) {
 					var tgrndm = Math.random() * (100 - 0);
 					if (0 <= tgrndm && tgrndm <= 51) {
-						if (homu.sm >= tgsmp) {
 							var twosmf = tgsmp * 2;
 							db.sm += twosmf;
 							db.twowc += 1;
 							db.twows += twosmf;
 							sqlite.set(message.author.id, db);
-							homu.sm -= twosmf;
-							sqlite.set('823130006480748556', homu);
 							var embed = new Discord.MessageEmbed()
 								.setColor('#0099FF')
 								.setTitle(':jigsaw: 1/2ゲーム')
@@ -75,22 +71,11 @@ module.exports = {
 								.setTimestamp()
 								.setFooter(`ステータスの確認: .n status`);
 							message.channel.send(embed);
-						} else {
-							var embed = new Discord.MessageEmbed()
-								.setColor('#0099FF')
-								.setTitle(':x: 失敗')
-								.setDescription('Esmileの発行上限に達しています。')
-								.setTimestamp();
-							message.channel.send(embed);
-							return;
-						}
 					} else {
 						db.sm -= tgsmp;
 						db.twolc += 1;
 						db.twols += tgsmp;
 						sqlite.set(message.author.id, db);
-						homu.sm += tgsmp;
-						sqlite.set('823130006480748556', homu);
 						var embed = new Discord.MessageEmbed()
 							.setColor('#0099FF')
 							.setTitle(':jigsaw: 1/2ゲーム')
