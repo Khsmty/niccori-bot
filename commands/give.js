@@ -11,8 +11,7 @@ module.exports = {
     if (
       message.author.id == '755381028817731605' ||
       message.author.id == '823130006480748556' ||
-      message.author.id == '723052392911863858' ||
-      message.author.id == '638979341371441152'
+      message.author.id == '723052392911863858'
     ) {
       try {
         if (args[2] === 'nd' || args[2] === 'ndollar') {

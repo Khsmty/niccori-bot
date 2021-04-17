@@ -34,7 +34,7 @@ module.exports = {
         }
       } else if (args[0] == 'sm' || args[0] == 'SM') {
         var chansm = channum / 1000000000000;
-        if (db.sm >= chansm) {
+        if (db.nd >= chansm) {
           db.nd -= chansm;
           db.sm += channum;
           sqlite.set(message.author.id, db);

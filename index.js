@@ -79,8 +79,12 @@ client.on('message', async message => {
 	try {
 		command.execute(message, args);
 	} catch (error) {
-		console.error(error);
-		message.reply('there was an error trying to execute that command!');
+		var embed = new Discord.MessageEmbed()
+			.setColor('#0099FF')
+			.setTitle(':x: 失敗')
+			.setDescription(`\`\`\`${error}\`\`\``)
+			.setTimestamp();
+		message.channel.send(embed);
 	}
 });
 

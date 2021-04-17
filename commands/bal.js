@@ -11,7 +11,20 @@ module.exports = {
 
 		if (message.mentions.users.size) {
 			var balmu = message.mentions.users.first();
-			var baldb = (await sqlite.get(balmu.id)) || { sm: 0 };
+			var baldb = (await sqlite.get(balmu.id)) || { sm: 0, nd: 0 };
+			if (baldb.nd == undefined) {
+				var embed = new Discord.MessageEmbed()
+					.setColor('#0099FF')
+					.setTitle(':moneybag: 所持金')
+					.setDescription(
+						`<@!${balmu.id}>さんの所持金:\n> Esmile: \`${
+							baldb.sm
+						}sm\`\n> Ndollar: \`0nd\``
+					)
+					.setTimestamp();
+				message.channel.send(embed);
+				return;
+			}
 			var embed = new Discord.MessageEmbed()
 				.setColor('#0099FF')
 				.setTitle(':moneybag: 所持金')
@@ -19,6 +32,17 @@ module.exports = {
 					`<@!${balmu.id}>さんの所持金:\n> Esmile: \`${
 						baldb.sm
 					}sm\`\n> Ndollar: \`${baldb.nd}nd\``
+				)
+				.setTimestamp();
+			message.channel.send(embed);
+			return;
+		}
+		if (db.nd == undefined) {
+			var embed = new Discord.MessageEmbed()
+				.setColor('#0099FF')
+				.setTitle(':moneybag: 所持金')
+				.setDescription(
+					`あなたの所持金:\n> Esmile: \`${db.sm}sm\`\n> Ndollar: \`0nd\``
 				)
 				.setTimestamp();
 			message.channel.send(embed);

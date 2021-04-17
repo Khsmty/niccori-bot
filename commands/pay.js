@@ -27,21 +27,31 @@ module.exports = {
 				var paymd = (await sqlite.get(paymu.id)) || { sm: 0 };
 				var paysm = Number(args[1]);
 				if (db.sm >= paysm && paysm >= 1) {
-					db.sm -= paysm;
-					sqlite.set(message.author.id, db);
-					paymd.sm += paysm;
-					sqlite.set(paymu.id, paymd);
-					var embed = new Discord.MessageEmbed()
-						.setColor('#0099FF')
-						.setTitle(':white_check_mark: 成功')
-						.setDescription(
-							`${message.author} さんから <@!${
-								paymu.id
-							}> さんに \`${paysm}sm\` 送金しました。`
-						)
-						.setTimestamp();
-					message.channel.send(embed);
-					return;
+					if (paymu.id !== message.author.id) {
+						db.sm -= paysm;
+						sqlite.set(message.author.id, db);
+						paymd.sm += paysm;
+						sqlite.set(paymu.id, paymd);
+						var embed = new Discord.MessageEmbed()
+							.setColor('#0099FF')
+							.setTitle(':white_check_mark: 成功')
+							.setDescription(
+								`${message.author} さんから <@!${
+									paymu.id
+								}> さんに \`${paysm}sm\` 送金しました。`
+							)
+							.setTimestamp();
+						message.channel.send(embed);
+						return;
+					} else {
+						var embed = new Discord.MessageEmbed()
+							.setColor('#0099FF')
+							.setTitle(':x: 失敗')
+							.setDescription('自分自身に送金することはできません。')
+							.setTimestamp();
+						message.channel.send(embed);
+						return;
+					}
 				} else {
 					var embed = new Discord.MessageEmbed()
 						.setColor('#0099FF')
