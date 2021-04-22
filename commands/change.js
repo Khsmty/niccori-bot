@@ -24,6 +24,7 @@ module.exports = {
             )
             .setTimestamp();
           message.channel.send(embed);
+          return;
         } else {
           var embed = new Discord.MessageEmbed()
 		  	  	.setColor('#0099FF')
@@ -31,6 +32,7 @@ module.exports = {
 		  	  	.setDescription(`所持Esmile量が不足しています。\n\`${args[1]}nd\` へ両替するには、最低でも \`${channd}sm\` 必要です。`)
 		  	  	.setTimestamp();
 		  	  message.channel.send(embed);
+		  	  return;
         }
       } else if (args[0] == 'sm' || args[0] == 'SM') {
         var chansm = channum / 1000000000000;
